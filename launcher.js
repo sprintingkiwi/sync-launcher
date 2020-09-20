@@ -38,7 +38,7 @@ startGame = function () {
 }
 
 checkUsers = function () {
-    if (status["logged-user"] != "None") { // If there alrealdy is someone logged in
+    if (status["logged-user"] != "None" && status["logged-user"] != status["my-name"]) { // If there alrealdy is someone logged in
         console.log("There is already someone playing with this account. Quitting...")
         writeStatus(function () {
             setTimeout(function () {
