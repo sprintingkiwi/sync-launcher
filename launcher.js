@@ -1,4 +1,4 @@
-console.log("Welcome to the PTCGO Sync Launcher - by LoveBird Pixels")
+console.log("Welcome to the Sync Launcher system - by LoveBird Pixels")
 
 const child_process = require("child_process");
 const fs = require('fs');
