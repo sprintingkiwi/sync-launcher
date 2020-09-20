@@ -1,0 +1,20 @@
+{
+  "name": "sync-launcher",
+  "version": "1.0.0",
+  "description": "* Clone this repository (or download the master branch)\r * Copy the main folder inside your dropbox account and sync it with your friend(s)\r * Copy a link to your Online game inside the main folder and rename it \"start\"\r * Double click \"launcher.exe\"",
+  "main": "launcher.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sprintingkiwi/sync-launcher.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sprintingkiwi/sync-launcher/issues"
+  },
+  "homepage": "https://github.com/sprintingkiwi/sync-launcher#readme"
+}
