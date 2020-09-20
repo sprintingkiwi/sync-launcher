@@ -48,6 +48,7 @@ checkUsers = function () {
     }
     else { // If there is no one else logged in
         console.log("There's no one playing with this account, let's start the game!")
+        status["logged-user"] = status["my-name"];
         writeStatus(function () {
             startGame();
         });
