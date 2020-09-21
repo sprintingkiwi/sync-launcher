@@ -38,7 +38,7 @@ startGame = function (callback) {
 }
 
 checkUsers = function () {
-    if (status["logged-user"] != "None" && status["logged-user"] != status["my-name"]) { // If there alrealdy is someone logged in
+    if (status["logged-user"] != "None") { // && status["logged-user"] != status["my-name"]) { // If there alrealdy is someone logged in
         console.log("There is already someone playing with this account. Quitting...")
         writeStatus(function () {
             setTimeout(function () {
@@ -48,16 +48,18 @@ checkUsers = function () {
     }
     else { // If there is no one else logged in
         console.log("There's no one playing with this account, let's start the game!")
-        status["logged-user"] = status["my-name"];
-        startGame(function(){
-            status["logged-user"] = "None";
-            writeStatus(function () {
-                console.log("Freeing place for someone else");
-                setTimeout(function () {
-                    process.exit;
-                }, 2000);
+        status["logged-user"] = "Someone" // status["my-name"];
+        writeStatus(function () {
+            startGame(function () {
+                status["logged-user"] = "None";
+                writeStatus(function () {
+                    console.log("Freeing place for someone else. Goodbye.");
+                    setTimeout(function () {
+                        process.exit;
+                    }, 2000);
+                });
             });
-        });        
+        });
     }
 }
 
@@ -70,22 +72,24 @@ fs.readFile('status.json', function (err, data) {
 
     status = JSON.parse(data);
     console.log(status);
-    if (status["my-name"] == "") { // If it's the first time
-        const rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout
-        });
-        rl.question("Write your name...\n", function (answer) { // Ask user name
-            console.log(`Hello: ${answer}!`);
-            status["my-name"] = answer
-            rl.close();
-            checkUsers();
-        });
-    }
-    else {
-        console.log(`Welcome back ${status["my-name"]}!`);
-        checkUsers();
-    }
-});
 
-console.log('Goodbye');
+    // if (status["my-name"] == "") { // If it's the first time
+    //     const rl = readline.createInterface({
+    //         input: process.stdin,
+    //         output: process.stdout
+    //     });
+    //     rl.question("Write your name...\n", function (answer) { // Ask user name
+    //         console.log(`Hello: ${answer}!`);
+    //         status["my-name"] = answer
+    //         rl.close();
+    //         checkUsers();
+    //     });
+    // }
+    // else {
+    //     console.log(`Welcome back ${status["my-name"]}!`);
+    //     checkUsers();
+    // }
+
+    checkUsers();
+
+});
