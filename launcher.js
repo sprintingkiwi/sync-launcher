@@ -18,7 +18,7 @@ writeStatus = function (callback) {
     });
 }
 
-startGame = function () {
+startGame = function (callback) {
     child_process.exec("start.lnk", function (error, stdout, stderr) {
 
         // Error log
@@ -33,7 +33,7 @@ startGame = function () {
 
         // What happens after the game has been closed
         console.log(`stdout: ${stdout}`);
-
+        callback();
     });
 }
 
@@ -43,15 +43,21 @@ checkUsers = function () {
         writeStatus(function () {
             setTimeout(function () {
                 process.exit;
-            });
+            }, 2000);
         });
     }
     else { // If there is no one else logged in
         console.log("There's no one playing with this account, let's start the game!")
         status["logged-user"] = status["my-name"];
-        writeStatus(function () {
-            startGame();
-        });
+        startGame(function(){
+            status["logged-user"] = "None";
+            writeStatus(function () {
+                console.log("Freeing place for someone else");
+                setTimeout(function () {
+                    process.exit;
+                }, 2000);
+            });
+        });        
     }
 }
 
